@@ -1,0 +1,15 @@
+# 提供给编辑器使用，进行限制
+
+root = true
+
+[*]
+charset = utf-8 # 设置文件字符集
+indent_style = space # 缩进风格 (tab | space)
+indent_size = 2 # 缩进大小
+end_of_line = Lf # 控制换行类型(Lf | cr | crlf)
+trim_trailing_whitespace = true # 去除行尾任意空白字符
+insert_final_newline = true # 始终在文件末尾插入新行
+
+[*.md] # 仅 md 文件适用以下规则
+max_line_length = off
+trim_trailing_whitespace = false
