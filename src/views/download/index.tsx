@@ -27,7 +27,7 @@ const Download:React.FC<IProps>=(props)=>{
 //             <div>name:{props.name}</div>
 //             <div>age:{props.age}</div>
 //             <div>height{props.height}</div>
-//         </div>
+//         </div>.
 //     )
 // }
 
