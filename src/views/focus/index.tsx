@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { memo } from 'react'
+import type { FC, ReactNode } from 'react'
 
-const Focus =()=>{
-    return <div>focus</div>
+interface IProps {
+    children?: ReactNode
 }
 
-export default Focus
+const Focus: FC<IProps> = (props) => {
+    return (<div>Home</div>)
+}
+
+export default memo(Focus)
+
