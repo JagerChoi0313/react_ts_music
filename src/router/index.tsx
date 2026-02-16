@@ -1,9 +1,18 @@
 import React from 'react'
+
 import { RouteObject, Navigate } from 'react-router-dom'
-import Discover from '@/views/discover'
-import Mine from '@/views/mine'
-import Focus from '@/views/focus'
-import Download from '@/views/download'
+import {lazy} from 'react'
+
+//分包处理的写法
+const Discover=lazy(()=>import('@/views/discover'))
+const Mine=lazy(()=>import('@/views/mine'))
+const Focus=lazy(()=>import('@/views/focus'))
+const Download=lazy(()=>import('@/views/download'))
+
+// import Discover from '@/views/discover'
+// import Mine from '@/views/mine'
+// import Focus from '@/views/focus'
+// import Download from '@/views/download'
 
 const routes: RouteObject[] = [
     {
@@ -28,7 +37,7 @@ const routes: RouteObject[] = [
     },
     {
         path: '/download',
-        element: <Download name="Choi" age={18} />
+        element: <Download />
 
     }
 
