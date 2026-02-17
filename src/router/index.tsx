@@ -14,6 +14,14 @@ const Download=lazy(()=>import('@/views/download'))
 // import Focus from '@/views/focus'
 // import Download from '@/views/download'
 
+//二级路由
+const Recommend =lazy(()=>import('@/views/discover/children-views/recommend'))
+const Artist =lazy(()=>import('@/views/discover/children-views/artist'))
+const Songs =lazy(()=>import('@/views/discover/children-views/songs'))
+const DJradio =lazy(()=>import('@/views/discover/children-views/DJradio'))
+const Album =lazy(()=>import('@/views/discover/children-views/album'))
+const Ranking =lazy(()=>import('@/views/discover/children-views/ranking'))
+
 const routes: RouteObject[] = [
     {
         path: '/',
@@ -22,8 +30,33 @@ const routes: RouteObject[] = [
     },
     {
         path: '/discover',
-        element: <Discover />
-
+        element: <Discover />,
+        children:[
+            {
+                path:'/discover/recommned',
+                element:<Recommend/>
+            },
+             {
+                path:'/discover/songs',
+                element:<Songs/>
+            },
+             {
+                path:'/discover/artist',
+                element:<Artist/>
+            },
+             {
+                path:'/discover/ranking',
+                element:<Ranking/>
+            },
+             {
+                path:'/discover/DJradio',
+                element:<DJradio/>
+            },
+             {
+                path:'/discover/album',
+                element:<Album/>
+            }
+        ]
     },
     {
         path: '/mine',
