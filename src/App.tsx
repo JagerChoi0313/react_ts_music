@@ -1,28 +1,39 @@
 import React from 'react'
 import { useRoutes } from 'react-router-dom'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import routes from './router'
-import {Suspense} from 'react'
-import {shallowEqual} from 'react-redux'
+import { Suspense } from 'react'
+import { shallowEqual } from 'react-redux'
 import store from './store'
-import {useAppSelector} from './store'
-// import {IRootState} from './store'
+import { useAppSelector } from './store'
+import {IRootState} from './store'
+import {useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
+import {changeMessageAction} from './store/modules/counter'
 
 // type GetStateFnType =typeof store.getState
 // type IRootState =ReturnType<GetStateFnType>
 
 function App() {
 
-// const {count,message}=useSelector((state:IRootState)=>({
-//   count:state.counter.count,
-//   message:state.counter.message
-// }),shallowEqual)
+  const {count,message}=useSelector((state:IRootState)=>({
+    count:state.counter.count,
+    message:state.counter.message
+  }),shallowEqual)
 
-//动态推导state类型
-const {count,message}=useAppSelector((state)=>({
-  count:state.counter.count,
-  message:state.counter.message
-}),shallowEqual)
+  //动态推导state类型
+  // const { count, message } = useAppSelector((state) => ({
+  //   count: state.counter.count,
+  //   message: state.counter.message
+  // }), shallowEqual)
+
+
+
+  //事件处理函数
+  const dispatch=useDispatch()
+  function handleChangeMessage() {
+    dispatch(changeMessageAction('哈哈哈哈哈'))
+  }
 
   return (
     <div className="App">
@@ -34,8 +45,9 @@ const {count,message}=useAppSelector((state)=>({
       </div>
       <h2>当前计数：{count}</h2>
       <h2>当前消息：{message}</h2>
+      <button onClick={handleChangeMessage}>修改Message</button>
       <Suspense fallback="Loading...">
-      <div className="main">{useRoutes(routes)}</div>
+        <div className="main">{useRoutes(routes)}</div>
       </Suspense>
     </div>
   )
