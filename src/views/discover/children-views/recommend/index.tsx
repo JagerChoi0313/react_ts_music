@@ -1,11 +1,10 @@
 import React, { memo } from 'react'
 import type { FC, ReactNode } from 'react'
-import {useEffect,useState} from 'react'
+import { useEffect, useState } from 'react'
 import hyRequest from '@/service'
 
-
 interface IProps {
-    children?: ReactNode
+  children?: ReactNode
 }
 
 export interface IBannerData {
@@ -21,27 +20,30 @@ export interface IBannerData {
   bannerBizType: string
 }
 
-
 const Recommend: FC<IProps> = () => {
 
-    //测试网络请求
-    useEffect(()=>{
-        const [banners,setBanners] = useState<IBannerData[]>([])
-    hyRequest.get({
-        url:'/banner'
-    })
-    .then((res)=>{
-        setBanners(res.banners)
-    })
-    },[])
+  // ✅ 必须写在最外层
+  const [banners, setBanners] = useState<IBannerData[]>([])
 
-    return (
+  useEffect(() => {
+    hyRequest.get({
+      url: '/banner'
+    }).then((res) => {
+      setBanners(res.banners)
+    })
+  }, [])
+
+  return (
     <div>
-      {banners.map((item,index)=>{
-        return <div key={index}>{item.imageurl} <div/>
-    })}
+      {banners.map((item, index) => {
+        return (
+          <div key={index}>
+            <img src={item.imageUrl} alt="" />
+          </div>
+        )
+      })}
     </div>
-    )
+  )
 }
 
 export default memo(Recommend)
