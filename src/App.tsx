@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom'
 import routes from './router'
 import { Suspense } from 'react'
 import { shallowEqual } from 'react-redux'
-import store from './store'
-import { useAppSelector } from './store'
 import {IRootState} from './store'
 import {useSelector} from 'react-redux'
 import {useDispatch} from 'react-redux'
 import {changeMessageAction} from './store/modules/counter'
+import Demo02 from './views/demo/demo02'
 
 // type GetStateFnType =typeof store.getState
 // type IRootState =ReturnType<GetStateFnType>
@@ -38,6 +37,7 @@ function App() {
   return (
     <div className="App">
       <div className="Nav">
+        <Demo02 name="Choi" age={18}/>
         <Link to="Discover">发现音乐</Link>
         <Link to="Mine">我的音乐</Link>
         <Link to="Focus">关注</Link>

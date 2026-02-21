@@ -7,29 +7,25 @@ interface IProps {
   children?: ReactNode
 }
 
+// 修改为与 /banner 接口返回的数据结构匹配
 export interface IBannerData {
-  imageUrl: string
   targetId: number
-  adid: any
+  bigImageUrl: string
+  imageUrl: string
   targetType: number
-  titleColor: string
   typeTitle: string
-  url: string
-  exclusive: boolean
   scm: string
-  bannerBizType: string
+  url: string
 }
 
 const Recommend: FC<IProps> = () => {
-
-  // ✅ 必须写在最外层
   const [banners, setBanners] = useState<IBannerData[]>([])
 
   useEffect(() => {
     hyRequest.get({
-      url: '/banner'
+      url: '/banner'  // 使用正确的轮播图接口
     }).then((res) => {
-      setBanners(res.banners)
+      setBanners(res.banners)  // 正确处理返回的数据结构
     })
   }, [])
 
