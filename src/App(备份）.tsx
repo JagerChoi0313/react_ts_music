@@ -11,6 +11,7 @@ import {changeMessageAction} from './store/modules/counter'
 import Demo02 from './views/demo/demo02'
 import AppHeader from './components/app-header'
 import AppFooter from './components/app-footer'
+import {Button} from 'antd'
 
 // type GetStateFnType =typeof store.getState
 // type IRootState =ReturnType<GetStateFnType>
@@ -44,6 +45,13 @@ function App() {
       </Suspense>
 
       <AppFooter/>
+
+      <Button type="primary">Primary Button</Button>
+      <Button>Default Button</Button>
+      <Button type="dashed">Dashed Button</Button>
+      <br/>
+      <Button type="text">Text Button</Button>
+      <Button type="link">Link Button</Button>
 
        <Demo02 name="Choi" age={18}/>
       <h2>当前计数：{count}</h2>

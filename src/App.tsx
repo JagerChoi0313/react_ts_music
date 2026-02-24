@@ -8,6 +8,7 @@ import theme from './assets/theme'
 
 
 
+
 function App() {
 
   return (
@@ -17,10 +18,7 @@ function App() {
         <Suspense fallback="Loading...">
           <div className="main">{useRoutes(routes)}</div>
         </Suspense>
-
         <AppFooter />
-
-
       </div>
     </ThemeProvider>
   )

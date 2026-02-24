@@ -5,6 +5,8 @@ import {HeaderWrapper} from './style'
 import {HeaderLeft} from './style'
 import {HeaderRight} from './style'
 import headerTitles from '@/assets/data/header-title.json'
+import { SearchOutlined } from '@ant-design/icons';
+import { Input } from 'antd';
 
 
 interface IProps {
@@ -52,7 +54,14 @@ const AppHeader: FC<IProps> = (props) => {
         })}
         </div>
         </HeaderLeft>
-        <HeaderRight>Right</HeaderRight>
+        <HeaderRight>
+         <span className="input">
+        <Input
+        placeholder="音乐/视频/电台/用户" prefix={<SearchOutlined />} />
+         </span>
+         <span className="center">创作者中心</span>
+         <span className="login">登录</span>
+        </HeaderRight>
         </div>
     <div className="divider"></div>
     </HeaderWrapper>

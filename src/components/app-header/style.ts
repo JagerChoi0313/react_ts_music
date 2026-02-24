@@ -35,12 +35,15 @@ export const HeaderLeft = styled.div`
     padding: 0;
     .item {
       position: relative;
+      white-space: nowrap; /* 防止文字换行 */
+
       a {
         display: block;
         padding: 0 20px;
         line-height: 70px;
         color: #ccc;
         transition: all 0.3s;
+        white-space: nowrap; /* 防止文字换行 */
       }
       /* 当前选中项样式 */
       &.active {
@@ -78,4 +81,34 @@ export const HeaderLeft = styled.div`
   }
 `
 
-export const HeaderRight = styled.div``
+export const HeaderRight = styled.div`
+display: flex;
+  align-items: center;
+  color: #787878;
+  font-size: 12px;
+
+  > .input {
+    input {
+      width: 158px;
+      height: 32px;
+      border-radius: 16px;
+      font-size: 12px;
+
+      &::placeholder {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .center {
+    width: 80px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border: 1px solid #666;
+    border-radius: 16px;
+    margin: 0 16px;
+    color: #fff;
+    cursor: pointer;
+  }
+`
