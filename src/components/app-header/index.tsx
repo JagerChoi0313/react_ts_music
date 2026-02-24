@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import type { FC, ReactNode } from 'react'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import {HeaderWrapper} from './style'
 import {HeaderLeft} from './style'
 import {HeaderRight} from './style'
@@ -13,10 +13,21 @@ interface IProps {
 
 const AppHeader: FC<IProps> = (props) => {
 
+//定义组件内部状态
+
+//组件展示逻辑
     function showItem(item:any){
         if(item.type==='path')
         {
-            return <Link to={item.link}>{item.title}</Link>
+            return <NavLink
+             to={item.link}
+              className={({isActive})=>{
+                return isActive?'active':undefined
+              }}
+             >
+                {item.title}
+                <i className='icon'></i>
+                </NavLink>
         }else{
             return <a href={item.link} rel="noreferrer" target="_blank">
                 {item.title}</a>
@@ -43,6 +54,7 @@ const AppHeader: FC<IProps> = (props) => {
         </HeaderLeft>
         <HeaderRight>Right</HeaderRight>
         </div>
+    <div className="divider"></div>
     </HeaderWrapper>
       )
 }
