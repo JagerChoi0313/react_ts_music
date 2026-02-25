@@ -1,43 +1,25 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
-import { useEffect, useState } from 'react'
-import hyRequest from '@/service'
+import { useAppDispatch } from '@/store'
+import { fetchBannerDataAction } from './store/recommend'
 
 interface IProps {
   children?: ReactNode
 }
 
 // 修改为与 /banner 接口返回的数据结构匹配
-export interface IBannerData {
-  targetId: number
-  bigImageUrl: string
-  imageUrl: string
-  targetType: number
-  typeTitle: string
-  scm: string
-  url: string
-}
-
 const Recommend: FC<IProps> = () => {
-  const [banners, setBanners] = useState<IBannerData[]>([])
 
+  //发起action获取数据
+  const dispatch = useAppDispatch()
   useEffect(() => {
-    hyRequest.get({
-      url: '/banner'  // 使用正确的轮播图接口
-    }).then((res) => {
-      setBanners(res.banners)  // 正确处理返回的数据结构
-    })
+    dispatch(fetchBannerDataAction())
   }, [])
 
+  //render函数返回jsx
   return (
     <div>
-      {banners.map((item, index) => {
-        return (
-          <div key={index}>
-            <img src={item.imageUrl} alt="" />
-          </div>
-        )
-      })}
+      Recommand
     </div>
   )
 }
