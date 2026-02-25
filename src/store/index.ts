@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './modules/counter'
-import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux'
+import { useSelector, TypedUseSelectorHook, useDispatch, shallowEqual } from 'react-redux'
 import recommendReducer from '../views/discover/children-views/recommend/store/recommend'
 
 
@@ -15,6 +15,7 @@ type GetStateFnType = typeof store.getState
 export type IRootState = ReturnType<GetStateFnType>
 
 export const useAppSelector: TypedUseSelectorHook<IRootState> = useSelector
+export const shallowEqualApp = shallowEqual
 
 export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = () => useDispatch<AppDispatch>()

@@ -2,6 +2,7 @@ import React, { memo, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
 import { useAppDispatch } from '@/store'
 import { fetchBannerDataAction } from './store/recommend'
+import TopBanner from './c-cpns/top-banner'
 
 interface IProps {
   children?: ReactNode
@@ -19,6 +20,7 @@ const Recommend: FC<IProps> = () => {
   //render函数返回jsx
   return (
     <div>
+      <TopBanner/>
       Recommand
     </div>
   )
