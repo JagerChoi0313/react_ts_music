@@ -26,6 +26,31 @@ export const BannerLeft = styled.div`
     height: 100%;
     object-fit: cover;
   }
+
+  .dots {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  >li{
+    margin: 0 2px;
+    .item {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background:url(${new URL('@/assets/img/banner_sprite.png', import.meta.url).href}) 3px -343px;
+      cursor: pointer;
+      &:hover,
+      &.active {
+        background-position: -16px -343px;
+      }
+    }
+  }
+
+}
 `
 
 export const BannerRight = styled.a.attrs({

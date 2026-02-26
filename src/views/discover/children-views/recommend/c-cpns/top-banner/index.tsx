@@ -3,6 +3,7 @@ import type { FC, ReactNode } from 'react'
 import {useAppSelector,shallowEqualApp} from '@/store'
 import {BannerControl, BannerLeft, BannerRight, BannerWrapper} from './style'
 import {Carousel} from 'antd'
+import classNames from 'classnames'
 
 interface IProps {
     children?: ReactNode
@@ -19,9 +20,13 @@ const TopBanner: FC<IProps> = (props) => {
     }),shallowEqualApp)
 
     //事件处理函数
+    function handleBeforeChange(from:number,to:number){
+        setCurrentIndex(-1)
+    }
     function handlePrevClick(){
         bannerRef.current?.prev()
     }
+
     function handleNextClick(){
         bannerRef.current?.next()
     }
@@ -31,18 +36,25 @@ const TopBanner: FC<IProps> = (props) => {
     }
 
     //轮播图的毛玻璃效果
-    let bgImageUrl=banners[currentIndex]?.imageUrl
-    if(bgImageUrl){
-        bgImageUrl=bgImageUrl+'?imageView&blur=40x20'
+    let bgImageUrl
+    if(currentIndex>=0&&banners.length>0)
+    {
+        bgImageUrl=banners[currentIndex].imageUrl+'?imageView&blur=40x20'
     }
-    console.log(bgImageUrl)
 
     return (
     <BannerWrapper style={{background:`url('${bgImageUrl}')center center / 6000px`
         }}>
         <div className="banner wrap-v2">
             <BannerLeft>
-            <Carousel autoplay effect="fade" ref={bannerRef} afterChange={handleAfterChange}>
+            <Carousel
+            autoplay
+            dots={false}
+            effect="fade"
+            ref={bannerRef}
+            beforeChange={handleBeforeChange}
+            afterChange={handleAfterChange}
+            >
                     {
                     banners.map(item=>{
                         return(
@@ -56,6 +68,19 @@ const TopBanner: FC<IProps> = (props) => {
                     })
                     }
             </Carousel>
+
+            <ul className="dots">
+                    {
+                        banners.map((item,index)=>{
+                            return(
+                                <li key={item.imageUrl}>
+                                    <span className={classNames('item',
+                                        {active:index===currentIndex})}></span>
+                                </li>
+                            )
+                        })
+                    }
+            </ul>
 
         </BannerLeft>
         <BannerRight></BannerRight>
