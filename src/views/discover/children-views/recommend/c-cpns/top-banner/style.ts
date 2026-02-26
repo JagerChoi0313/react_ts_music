@@ -55,7 +55,12 @@ export const BannerControl = styled.div`
     }
 
     .left {
-        left: -68px;
+        left: -100px; // 调整偏移
         background-position: 0 -360px;
+    }
+
+    .right {
+        right: -100px; // 调整偏移
+        background-position: 0 -508px; // sprite 对应右箭头
     }
 `
