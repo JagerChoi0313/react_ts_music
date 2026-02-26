@@ -1,96 +1,85 @@
-import React, { memo,useRef,ElementRef,useState } from 'react'
-import type { FC, ReactNode } from 'react'
-import {useAppSelector,shallowEqualApp} from '@/store'
-import {BannerControl, BannerLeft, BannerRight, BannerWrapper} from './style'
-import {Carousel} from 'antd'
-import classNames from 'classnames'
+import { useAppSelector } from "@/store";
+import { memo, useRef, useState, type FC, type ReactNode } from "react";
+import { shallowEqual } from "react-redux";
+import { BannerControl, BannerLeft, BannerRight, BannerWrapper } from "./style";
+import { Carousel } from "antd";
 
 interface IProps {
     children?: ReactNode
 }
 
-const TopBanner: FC<IProps> = (props) => {
-    //定义内部数据
-    const [currentIndex,setCurrentIndex]=useState(0)
-    const bannerRef=useRef<ElementRef<typeof Carousel>>(null)
+const TopBanner: FC<IProps> = () => {
+    const [current, setCurrent] = useState(0);
+    const { banners } = useAppSelector((state) => ({
+        banners: state.recommend.banners,
+    }), shallowEqual);
 
-    //从store中获取数据
-    const {banners} = useAppSelector((state)=>({
-        banners:state.recommend.banners
-    }),shallowEqualApp)
+    const carouselRef = useRef<any>(null);
 
-    //事件处理函数
-    function handleBeforeChange(from:number,to:number){
-        setCurrentIndex(-1)
-    }
-    function handlePrevClick(){
-        bannerRef.current?.prev()
-    }
+    const handlePrevClick = () => {
+        carouselRef.current?.prev();
+    };
 
-    function handleNextClick(){
-        bannerRef.current?.next()
-    }
+    const handleNextClick = () => {
+        carouselRef.current?.next();
+    };
 
-    function handleAfterChange(current:number){
-        setCurrentIndex(current)
-    }
+    // 处理红点点击事件
+    const handleDotClick = (index: number) => {
+        setCurrent(index);
+        carouselRef.current?.goTo(index);
+    };
 
-    //轮播图的毛玻璃效果
-    let bgImageUrl
-    if(currentIndex>=0&&banners.length>0)
-    {
-        bgImageUrl=banners[currentIndex].imageUrl+'?imageView&blur=40x20'
+    // 使用beforeChange回调，在轮播开始切换前更新状态
+    const handleBeforeChange = (from: number, to: number) => {
+        setCurrent(to);
+    };
+
+    // 直接使用current状态，不再访问ref
+    let bgImgUrl = banners[current]?.imageUrl;
+    if (bgImgUrl) {
+        bgImgUrl = bgImgUrl + '?imageView&blur=40x20';
     }
 
     return (
-    <BannerWrapper style={{background:`url('${bgImageUrl}')center center / 6000px`
-        }}>
-        <div className="banner wrap-v2">
-            <BannerLeft>
-            <Carousel
-            autoplay
-            dots={false}
-            effect="fade"
-            ref={bannerRef}
-            beforeChange={handleBeforeChange}
-            afterChange={handleAfterChange}
-            >
-                    {
-                    banners.map(item=>{
-                        return(
-                            <div className='banner-item' key={item.imageUrl}>
-                                <img
-                                className="image"
-                                src={item.imageUrl}
-                                alt={item.typeTitle}/>
-                            </div>
-                        )
-                    })
-                    }
-            </Carousel>
-
-            <ul className="dots">
-                    {
-                        banners.map((item,index)=>{
-                            return(
-                                <li key={item.imageUrl}>
-                                    <span className={classNames('item',
-                                        {active:index===currentIndex})}></span>
+        <BannerWrapper style={{ background: `url(${bgImgUrl}) center center / 6000px` }}>
+            <div className="banner wrap-v2">
+                <BannerLeft>
+                    <Carousel
+                        autoplay
+                        ref={carouselRef}
+                        effect="fade"
+                        beforeChange={handleBeforeChange} // 使用beforeChange替代afterChange
+                        dots={false}
+                    >
+                        {
+                            banners.map((item: { imageUrl: string, targetUrl: string }) => {
+                                return (
+                                    <div key={item.targetUrl} className="banner-item">
+                                        <img src={item.imageUrl} alt="" className="img" />
+                                    </div>
+                                )
+                            })
+                        }
+                    </Carousel>
+                    <ul className="dots">
+                        {banners.map((item: { imageUrl: string, targetUrl: string }, index: number) => {
+                            return (
+                                <li key={item.imageUrl} onClick={() => handleDotClick(index)}>
+                                    <span className={current === index ? 'active item' : 'item'}></span>
                                 </li>
                             )
-                        })
-                    }
-            </ul>
+                        })}
+                    </ul>
+                </BannerLeft>
+                <BannerRight></BannerRight>
+                <BannerControl>
+                    <button className="btn left" onClick={handlePrevClick}></button>
+                    <button className="btn right" onClick={handleNextClick}></button>
+                </BannerControl>
+            </div>
+        </BannerWrapper>
+    );
+};
 
-        </BannerLeft>
-        <BannerRight></BannerRight>
-        <BannerControl>
-            <button className="btn left" onClick={handlePrevClick}></button>
-            <button className="btn right" onClick={handleNextClick}></button>
-        </BannerControl>
-        </div>
-    </BannerWrapper>
-    )
-}
-
-export default memo(TopBanner)
+export default memo(TopBanner);
