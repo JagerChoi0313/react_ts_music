@@ -1,13 +1,24 @@
 import React, { memo } from 'react'
 import type { FC, ReactNode } from 'react'
 import {HeaderV1Wrapper} from './style'
+import {Link} from 'react-router-dom'
 
 interface IProps {
     children?: ReactNode
+    title?:string
+    keywords?:string[]
+    moreText?:string
+    moreLink?:string
 }
 
 const AreaHeaderV1: FC<IProps> = (props) => {
-    const keywords=['华语','流行','摇滚','民谣','电子']
+    //从props中获取属性,括号里面是没拿到时的默认值
+    const {title="默认标题",
+        keywords=[],
+        moreText="更多",
+        moreLink="/"
+    }=props
+
     return (
     <HeaderV1Wrapper className="sprite_02">
     <div className="left">
@@ -27,9 +38,9 @@ const AreaHeaderV1: FC<IProps> = (props) => {
         </div>
     </div>
     <div className="right">
-        <a className="more" href="">
-            更多
-        </a>
+        <Link className="more" to={moreLink}>
+            {moreText}
+        </Link>
         <i className="sprite_02 icon"></i>
     </div>
     </HeaderV1Wrapper>)
