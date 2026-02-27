@@ -4,6 +4,7 @@ import {RecommendWrapper} from './style'
 import AreaHeaderV1 from '@/components/area-header-v1'
 import {useAppSelector} from '@/store'
 import {shallowEqual} from 'react-redux'
+import SongMenuItem from '@/components/song-menu-item'
 
 
 interface IProps {
@@ -24,14 +25,10 @@ const HotRecommend: FC<IProps> = (props) => {
         moreLink="/discover/songs"
         />
 
-        <div className="hot-recommend">
+        <div className="recommend-list">
             {
                 hotRecommends.map((item)=>{
-                    return(
-                        <div className="item" key={item.id}>
-                            {item.name}
-                        </div>
-                    )
+                    return <SongMenuItem key={item.id} itemData={item}/>
                 })
             }
         </div>
