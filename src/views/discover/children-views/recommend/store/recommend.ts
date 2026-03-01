@@ -20,6 +20,7 @@ export const fetchNewAlbumAction=createAsyncThunk(
     'newAlbum',
     async(arg,{dispatch})=>{
         const res=await getNewAlbum()
+        console.log(res)
         dispatch(changeNewAlbumAction(res.albums))
     }
 )
