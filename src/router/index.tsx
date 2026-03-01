@@ -31,7 +31,7 @@ const routes: RouteObject[] = [
   },
   {
     path: '/download',
-    element: <Download  />
+    element: <Download />
   }
 ];
 

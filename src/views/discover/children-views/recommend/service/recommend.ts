@@ -1,16 +1,22 @@
 import hyRequest from '@/service'
 
-export function getBanners(){
+export function getBanners() {
     return hyRequest.get({
-        url:'/banner'
+        url: '/banner'
     })
 }
 
-export function getHotRecommend(limit=30){
+export function getHotRecommend(limit = 30) {
     return hyRequest.get({
-        url:'/personalized',
-        params:{
+        url: '/personalized',
+        params: {
             limit
         }
+    })
+}
+
+export function getNewAlbum() {
+    return hyRequest.get({
+        url: '/album/newest'
     })
 }

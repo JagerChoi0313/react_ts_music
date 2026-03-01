@@ -1,5 +1,5 @@
-import React, { memo,useRef} from 'react'
-import type { FC, ReactNode,ElementRef} from 'react'
+import React, { memo, useRef } from 'react'
+import type { FC, ReactNode, ElementRef } from 'react'
 import { AlbumWrapper } from './style'
 import { Carousel } from 'antd'
 import AreaHeaderV1 from '@/components/area-header-v1'
@@ -10,13 +10,13 @@ interface IProps {
 
 const NewAlbum: FC<IProps> = (props) => {
     //定义内部数据
-    const bannerRef=useRef<ElementRef<typeof Carousel>>(null)
+    const bannerRef = useRef<ElementRef<typeof Carousel>>(null)
 
     //点击事件处理函数
-    function handlePrevClick(){
+    function handlePrevClick() {
         bannerRef.current?.prev()
     }
-    function handleNextClick(){
+    function handleNextClick() {
         bannerRef.current?.next()
     }
     return (
@@ -24,7 +24,7 @@ const NewAlbum: FC<IProps> = (props) => {
             <AreaHeaderV1 title="新碟上架" moreLink="/discover/album" />
             <div className="content">
                 <button className="sprite_02 arrow arrow-left"
-                onClick={handlePrevClick}>
+                    onClick={handlePrevClick}>
 
                 </button>
                 <div className="banner">
@@ -37,7 +37,7 @@ const NewAlbum: FC<IProps> = (props) => {
                     </Carousel>
                 </div>
                 <button className="sprite_02 arrow arrow-right"
-                onClick={handleNextClick}>
+                    onClick={handleNextClick}>
 
                 </button>
             </div>

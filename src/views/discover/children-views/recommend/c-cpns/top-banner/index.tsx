@@ -53,9 +53,9 @@ const TopBanner: FC<IProps> = () => {
                         dots={false}
                     >
                         {
-                            banners.map((item: { imageUrl: string, targetUrl: string }) => {
+                            banners.map((item: { imageUrl: string, targetUrl: string }, index: number) => {
                                 return (
-                                    <div key={item.targetUrl} className="banner-item">
+                                    <div key={item.targetUrl || index} className="banner-item">
                                         <img src={item.imageUrl} alt="" className="img" />
                                     </div>
                                 )
@@ -65,7 +65,7 @@ const TopBanner: FC<IProps> = () => {
                     <ul className="dots">
                         {banners.map((item: { imageUrl: string, targetUrl: string }, index: number) => {
                             return (
-                                <li key={item.imageUrl} onClick={() => handleDotClick(index)}>
+                                <li key={item.imageUrl || index} onClick={() => handleDotClick(index)}>
                                     <span className={current === index ? 'active item' : 'item'}></span>
                                 </li>
                             )
