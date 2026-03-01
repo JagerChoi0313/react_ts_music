@@ -29,8 +29,12 @@ export const AlbumWrapper = styled.div`
     .arrow-right {
       background-position: -300px -75px;
       &:hover{
-        background-position: -320px -75px;
+      background-position: -320px -75px;
       }
+    }
+
+    .banner{
+    overflow:hidden;
     }
   }
 `
