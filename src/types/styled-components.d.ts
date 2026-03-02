@@ -10,6 +10,7 @@ declare module 'styled-components' {
     size: {};
     mixin: {
       wrapv1: string;
+      textNowrap: string;
     };
   }
 }

@@ -39,6 +39,7 @@ export const AlbumWrapper = styled.div`
       .album-list {
         display: flex;
         justify-content: space-between;
+        algin-items:center;
       }
     }
   }
