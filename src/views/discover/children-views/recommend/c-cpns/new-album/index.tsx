@@ -57,7 +57,7 @@ const NewAlbum: FC<IProps> = (props) => {
 
                 </button>
             </div>
-            NewAlbum
+            
         </AlbumWrapper>
     )
 }

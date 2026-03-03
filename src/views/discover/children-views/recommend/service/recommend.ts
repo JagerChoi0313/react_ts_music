@@ -21,11 +21,27 @@ export function getNewAlbum() {
     })
 }
 
-export function getPlayListDetail(id:number){
+export function getSoarRanking() {
     return hyRequest.get({
-        url:'./toplist/detail',
-        params:{
-            id
+        url: '/playlist/detail',
+        params: {
+            id: 19723756
+        }
+    })
+}
+export function getNewRanking() {
+    return hyRequest.get({
+        url: '/playlist/detail',
+        params: {
+            id: 3779629
+        }
+    })
+}
+export function getOriginalRanking() {
+    return hyRequest.get({
+        url: '/playlist/detail',
+        params: {
+            id: 2884035
         }
     })
 }

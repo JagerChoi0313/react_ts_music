@@ -2,7 +2,7 @@ import React, { memo, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
 import { useAppDispatch } from '@/store'
 // import { fetchBannerDataAction, fetchHotRecommendAction, fetchNewAlbumAction } from './store/recommend'
-import {fetchRecommendDataAction,fetchRankingDataAction} from './store/recommend'
+import {fetchRecommendDataAction,fetchSoarRanking, fetchNewRanking, fetchOriginalRanking } from './store/recommend'
 import TopBanner from './c-cpns/top-banner'
 import { RecommendWrapper } from './style'
 import HotRecommend from './c-cpns/hot-recommend'
@@ -21,7 +21,9 @@ const Recommend: FC<IProps> = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(fetchRecommendDataAction())
-    dispatch(fetchRankingDataAction())
+    dispatch(fetchSoarRanking())
+    dispatch(fetchNewRanking())
+    dispatch(fetchOriginalRanking())
     // dispatch(fetchBannerDataAction())
     // dispatch(fetchHotRecommendAction())
     // dispatch(fetchNewAlbumAction())
