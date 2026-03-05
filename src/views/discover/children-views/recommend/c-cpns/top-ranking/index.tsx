@@ -2,18 +2,24 @@ import { memo, type FC, type ReactNode } from "react";
 import { RankingWrapper } from "./style";
 import AreaHeaderV1 from '@/components/area-header-v1'
 import { shallowEqual } from "react-redux";
-import { useAppSelector } from "@/store";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { fetchCurrentSongAction } from "../player/store/player";
 
 interface IProps {
     children?: ReactNode
 }
 
 const RankingList: FC<IProps> = () => {
+    const dispatch = useAppDispatch()
     const { soarRanking, newRanking, originalRanking } = useAppSelector((state) => ({
         soarRanking: state.recommend.soarRanking,
         newRanking: state.recommend.newRanking,
         originalRanking: state.recommend.originalRanking,
     }), shallowEqual);
+
+    const handlePlaySong = (id: number, list: any[]) => {
+        dispatch(fetchCurrentSongAction({ id, playSongList: list }))
+    }
 
     return (
         <RankingWrapper>
@@ -30,7 +36,10 @@ const RankingList: FC<IProps> = () => {
                                 <h3>飙升榜</h3>
                             </a>
                             <div className="icon">
-                                <a href="" className="play sprite_02">
+                                <a href="" className="play sprite_02" onClick={(e) => {
+                                    e.preventDefault()
+                                    if (soarRanking.length) handlePlaySong(soarRanking[0].id, soarRanking)
+                                }}>
                                 </a>
                                 <a href="" className="collect sprite_02">
                                 </a>
@@ -45,7 +54,7 @@ const RankingList: FC<IProps> = () => {
                                         <li key={item.id}>
                                             <span>{index + 1}</span>
                                             <div className="info">
-                                                <div className="name">{item.name}</div>
+                                                <div className="name" onClick={() => handlePlaySong(item.id, soarRanking)}>{item.name}</div>
                                             </div>
                                         </li>
                                     )
@@ -65,7 +74,10 @@ const RankingList: FC<IProps> = () => {
                                 <h3>新歌榜</h3>
                             </a>
                             <div className="icon">
-                                <a href="" className="play sprite_02">
+                                <a href="" className="play sprite_02" onClick={(e) => {
+                                    e.preventDefault()
+                                    if (newRanking.length) handlePlaySong(newRanking[0].id, newRanking)
+                                }}>
                                 </a>
                                 <a href="" className="collect sprite_02">
                                 </a>
@@ -80,7 +92,7 @@ const RankingList: FC<IProps> = () => {
                                         <li key={item.id}>
                                             <span>{index + 1}</span>
                                             <div className="info">
-                                                <div className="name">{item.name}</div>
+                                                <div className="name" onClick={() => handlePlaySong(item.id, newRanking)}>{item.name}</div>
                                             </div>
                                         </li>
                                     )
@@ -100,7 +112,10 @@ const RankingList: FC<IProps> = () => {
                                 <h3>原创榜</h3>
                             </a>
                             <div className="icon">
-                                <a href="" className="play sprite_02">
+                                <a href="" className="play sprite_02" onClick={(e) => {
+                                    e.preventDefault()
+                                    if (originalRanking.length) handlePlaySong(originalRanking[0].id, originalRanking)
+                                }}>
                                 </a>
                                 <a href="" className="collect sprite_02">
                                 </a>
@@ -115,7 +130,7 @@ const RankingList: FC<IProps> = () => {
                                         <li key={item.id}>
                                             <span>{index + 1}</span>
                                             <div className="info">
-                                                <div className="name">{item.name}</div>
+                                                <div className="name" onClick={() => handlePlaySong(item.id, originalRanking)}>{item.name}</div>
                                             </div>
                                         </li>
                                     )

@@ -9,3 +9,20 @@ export function getSongDetail(ids: number | string) {
   })
 }
 
+export function getSongUrl(id: number | string) {
+  return hyRequest.get({
+    url: '/song/url',
+    params: {
+      id
+    }
+  })
+}
+
+export function getSongLyric(id: number | string) {
+  return hyRequest.get({
+    url: '/lyric',
+    params: {
+      id
+    }
+  })
+}

@@ -55,6 +55,33 @@ export const PlayerBarWrapper = styled.div`
       padding: 0 4px;
     }
   }
+
+  .lyric-line {
+    position: absolute;
+    right: 18px;
+    bottom: 55px;
+    max-width: 340px;
+    min-height: 22px;
+    line-height: 22px;
+    padding: 0 10px;
+    border-radius: 11px;
+    font-size: 12px;
+    color: #e9e9e9;
+    background: rgba(0, 0, 0, 0.56);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    .lyric-line {
+      right: 6px;
+      left: 6px;
+      max-width: none;
+      bottom: 52px;
+    }
+  }
 `
 
 export const BarControl = styled.div`

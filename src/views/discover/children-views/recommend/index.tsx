@@ -11,7 +11,6 @@ import TopRanking from './c-cpns/top-ranking'
 import UserLogin from './c-cpns/user-login'
 import HotAnchor from './c-cpns/hot-anchos'
 import SettleSinger from './c-cpns/setting-singer'
-import AppPlayerBar from './c-cpns/player/player-bar'
 
 
 interface IProps {
@@ -50,7 +49,6 @@ const Recommend: FC<IProps> = () => {
           <div><HotAnchor /></div>
         </div>
       </div>
-      <AppPlayerBar />
     </RecommendWrapper>
   )
 }

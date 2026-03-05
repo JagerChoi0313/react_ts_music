@@ -152,6 +152,7 @@ export const RankingWrapper = styled.div`
             white-space: nowrap;
             text-overflow: ellipsis;
             max-width: 100%;
+            cursor: pointer;
           }
         }
         
