@@ -1,7 +1,7 @@
 # React TS Music (网易云音乐仿站)
 
 一个基于 **React + TypeScript** 实现的网易云音乐前端仿站项目，目标是尽可能还原网易云音乐的页面结构与核心交互体验。
-
+API地址：https://gitee.com/Hua-lanni/NeteaseCloudMusicApi/blob/main/main.js
 ## 项目定位
 
 本项目为学习与实践用途，主要用于训练以下能力：
