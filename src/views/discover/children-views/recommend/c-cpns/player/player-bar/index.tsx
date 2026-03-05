@@ -1,8 +1,11 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
 import { PlayerBarWrapper, BarControl, BarPlayerInfo, BarOperator } from './style'
 import { Link } from "react-router-dom"
 import { Slider } from 'antd'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { getImageSize } from '@/utils/format'
+import { fetchCurrentSongAction } from '../store/player'
 import {
   CaretRightFilled,
   CustomerServiceOutlined,
@@ -19,6 +22,21 @@ interface IProps {
 }
 
 const AppPlayerBar: FC<IProps> = (props) => {
+  const dispatch = useAppDispatch()
+  const { currentSong } = useAppSelector((state) => ({
+    currentSong: state.player.currentSong
+  }))
+
+  useEffect(() => {
+    dispatch(fetchCurrentSongAction(386538))
+  }, [dispatch])
+
+  const singerName = currentSong?.ar?.[0]?.name ?? ''
+  const songName = currentSong?.name ?? ''
+  const coverUrl = currentSong?.al?.picUrl
+    ? getImageSize(currentSong.al.picUrl, 50)
+    : 'https://p2.music.126.net/bkBg46eD1bS9D2mzxkKAnQ==/3395291910036707.jpg?param=50y50'
+
   return (
     <PlayerBarWrapper className="player">
       <div className="content wrap-v2">
@@ -37,13 +55,13 @@ const AppPlayerBar: FC<IProps> = (props) => {
           <Link to="/player">
             <img
               className="img"
-              src="https://p2.music.126.net/bkBg46eD1bS9D2mzxkKAnQ==/3395291910036707.jpg?param=34y34"
+              src={coverUrl}
               alt="" />
           </Link>
           <div className="info">
             <div className="song">
-              <span className="song-name">Butterfly</span>
-              <span className="singer-name">David Tao</span>
+              <span className="song-name">{songName}</span>
+              <span className="singer-name">{singerName}</span>
             </div>
             <div className="progress">
               <Slider defaultValue={26} />
