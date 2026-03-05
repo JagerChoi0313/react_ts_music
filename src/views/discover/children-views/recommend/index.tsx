@@ -2,7 +2,7 @@ import React, { memo, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
 import { useAppDispatch } from '@/store'
 // import { fetchBannerDataAction, fetchHotRecommendAction, fetchNewAlbumAction } from './store/recommend'
-import {fetchRecommendDataAction,fetchSoarRanking, fetchNewRanking, fetchOriginalRanking } from './store/recommend'
+import { fetchRecommendDataAction, fetchSoarRanking, fetchNewRanking, fetchOriginalRanking, fetchArtistList } from './store/recommend'
 import TopBanner from './c-cpns/top-banner'
 import { RecommendWrapper } from './style'
 import HotRecommend from './c-cpns/hot-recommend'
@@ -11,6 +11,7 @@ import TopRanking from './c-cpns/top-ranking'
 import UserLogin from './c-cpns/user-login'
 import HotAnchor from './c-cpns/hot-anchos'
 import SettleSinger from './c-cpns/setting-singer'
+import AppPlayerBar from './c-cpns/player/player-bar'
 
 
 interface IProps {
@@ -27,6 +28,7 @@ const Recommend: FC<IProps> = () => {
     dispatch(fetchSoarRanking())
     dispatch(fetchNewRanking())
     dispatch(fetchOriginalRanking())
+    dispatch(fetchArtistList())
     // dispatch(fetchBannerDataAction())
     // dispatch(fetchHotRecommendAction())
     // dispatch(fetchNewAlbumAction())
@@ -44,11 +46,11 @@ const Recommend: FC<IProps> = () => {
         </div>
         <div className="right">
           <UserLogin />
-          <div><SettleSinger/></div>
-          <div><HotAnchor/></div>
+          <div><SettleSinger /></div>
+          <div><HotAnchor /></div>
         </div>
       </div>
-
+      <AppPlayerBar />
     </RecommendWrapper>
   )
 }

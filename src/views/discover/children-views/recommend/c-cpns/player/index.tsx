@@ -5,8 +5,8 @@ interface IProps {
     children?: ReactNode
 }
 
-const AppFooter: FC<IProps> = (props) => {
-    return (<div></div>)
+const Player: FC<IProps> = (props) => {
+    return (<div>Player</div>)
 }
 
-export default memo(AppFooter)
+export default memo(Player)

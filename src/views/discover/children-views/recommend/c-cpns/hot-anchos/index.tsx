@@ -12,7 +12,7 @@ const HotAnchor: FC<IProps> = (props) => {
     return (
     <div>
         <AnchorWrapper>
-        <AreaHeaderV2/>
+        <AreaHeaderV2 title="热门主播"/>
         <div className="anchors">
                 {
                     hotRadios.map((item)=>{
